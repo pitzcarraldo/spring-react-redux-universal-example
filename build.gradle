@@ -39,8 +39,10 @@ configurations {
 dependencies {
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.ning:async-http-client:1.9.31')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
+    testCompile('org.easytesting:fest-assert-core:2.0M10')
 }
 
 dependencyManagement {
