@@ -1,0 +1,56 @@
+
+{
+  "name": "isomorphic-redux-app",
+  "version": "0.1.2-beta",
+  "description": "An example of a isomorphic Redux application",
+  "scripts": {
+    "slate": "rm -rf node_modules && npm install",
+    "clean": "rm -rf dist",
+    "start": "NODE_ENV=development node src/server/index.js --progress --colors --profile",
+    "start-prod": "NODE_ENV=production node src/server/index.js --progress --colors --profile",
+    "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caljrimmer/isomorphic-redux-app.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.21",
+    "babel-plugin-typecheck": "^2.0.0",
+    "express": "^4.13.3",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-router": "^1.0.0-rc1",
+    "redux-router": "^1.0.0-beta3",
+    "react-redux": "^2.1.2",
+    "redux": "^3.0.0",
+    "redux-thunk": "^0.1.0",
+    "redux-undo": "^0.5.0",
+    "history": "^1.9.0",
+    "classnames" : "^2.1.5",
+    "axios" : "^0.7.0",
+    "serialize-javascript": "^1.1.2"
+  },
+  "devDependencies": {
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.1.1",
+    "redux-devtools": "^3.0.0-beta-3",
+    "redux-devtools-log-monitor": "^1.0.0-beta-3",
+    "redux-devtools-dock-monitor": "^1.0.0-beta-3",
+    "redux-logger" : "^2.0.4",
+    "babel-plugin-react-transform": "^1.1.0",
+    "babel-runtime": "^5.8.20",
+    "webpack": "^1.11.0",
+    "style-loader": "^0.8.0",
+    "css-loader": "^0.9.0",
+    "url-loader": "^0.5.6",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0",
+    "merge":"^1.2.0",
+    "extract-text-webpack-plugin" : "^0.8.2"
+  }
+}
