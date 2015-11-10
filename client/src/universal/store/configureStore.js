@@ -10,11 +10,11 @@ import rootReducer from '../reducers';
 const middlewareBuilder = () => {
 
   let middleware = {};
-  let universalMiddleware = [thunk,promiseMiddleware];
+  let universalMiddleware = [thunk, promiseMiddleware];
   let allComposeElements = [];
 
-  if(process.browser){
-    if(process.env.NODE_ENV === 'production'){
+  if (process.browser) {
+    if (process.env.NODE_ENV === 'production') {
       middleware = applyMiddleware(...universalMiddleware);
       allComposeElements = [
         middleware,
@@ -22,17 +22,17 @@ const middlewareBuilder = () => {
           createHistory
         })
       ]
-    }else{
-      middleware = applyMiddleware(...universalMiddleware,createLogger());
+    } else {
+      middleware = applyMiddleware(...universalMiddleware, createLogger());
       allComposeElements = [
         middleware,
         reduxReactRouter({
           createHistory
         })
-        ,DevTools.instrument()
+        , DevTools.instrument()
       ]
     }
-  }else{
+  } else {
     middleware = applyMiddleware(...universalMiddleware);
     allComposeElements = [
       middleware

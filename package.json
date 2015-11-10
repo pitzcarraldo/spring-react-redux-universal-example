@@ -4,14 +4,13 @@
   "description": "Example of The Universal Web Application using Spring Boot + React + Redux.",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
-    "clean": "rm -rf dist",
-    "start": "NODE_ENV=development node src/server/index.js --progress --colors --profile",
-    "start-prod": "NODE_ENV=production node src/server/index.js --progress --colors --profile",
-    "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile"
+    "clean": "rm -rf src/main/resources/static/dist",
+    "dev": "NODE_ENV=development node src/server/index.js --progress --colors --profile",
+    "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile --config client/webpack/webpack.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caljrimmer/isomorphic-redux-app.git"
+    "url": "git+https://github.com/Pitzcarraldo/spring-react-redux-universal-example.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -51,5 +50,8 @@
     "webpack-hot-middleware": "^2.2.0",
     "extract-text-webpack-plugin" : "^0.8.2",
     "json-loader": "^0.5.3"
+  },
+  "engines": {
+    "node": "4.2.2"
   }
 }

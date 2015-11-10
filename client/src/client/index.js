@@ -8,8 +8,8 @@ import { ReduxRouter } from 'redux-router';
 
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-import configureStore from '../common/store/configureStore';
-import routes from '../common/routes';
+import configureStore from '../universal/store/configureStore';
+import routes from '../universal/routes';
 import DevTools from '../server/devtools';
 
 import "../../styles/index.css";

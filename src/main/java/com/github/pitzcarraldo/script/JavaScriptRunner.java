@@ -1,4 +1,4 @@
-package com.github.pitzcarraldo;
+package com.github.pitzcarraldo.script;
 
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +34,8 @@ public class JavaScriptRunner {
 		NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
 		try {
 			nashornScriptEngine.eval(read("static/nashorn.polyfill.js"));
-			nashornScriptEngine.eval(read("static/server.js"));
-			nashornScriptEngine.eval(read("static/app.js"));
+			nashornScriptEngine.eval(read("static/dist/server.js"));
+			//nashornScriptEngine.eval(read("static/app.js"));
 		} catch (ScriptException e) {
 			throw new RuntimeException(e);
 		}

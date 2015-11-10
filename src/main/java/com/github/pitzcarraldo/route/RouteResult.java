@@ -1,5 +1,6 @@
-package com.github.pitzcarraldo;
+package com.github.pitzcarraldo.route;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class RouteResult {
-	private String status;
+	private Integer status;
 	private String result;
 }

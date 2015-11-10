@@ -1,3 +1,3 @@
 function render(uri) {
-	return server.render(uri);
+	return app.render(uri);
 }

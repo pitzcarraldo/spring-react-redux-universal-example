@@ -5,8 +5,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var webpackConfig = {
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.join(__dirname, '..', 'src', 'main', 'resources', 'static'),
+    filename: 'client.js',
     publicPath: '/static/'
   },
   plugins: [
@@ -16,10 +16,9 @@ var webpackConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-
-  webpackConfig = merge(webpackConfig,{
+  webpackConfig = merge(webpackConfig, {
     devtool: "source-map",
-    entry : [
+    entry: [
       './src/client/index.js'
     ],
     module: {
@@ -29,10 +28,11 @@ if (process.env.NODE_ENV === 'production') {
         exclude: /node_modules/,
         include: __dirname
       },
-      { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192'},
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap') }
-    ]},
-    plugins : [
+        {test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192'},
+        {test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap')}
+      ]
+    },
+    plugins: [
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production')
@@ -40,12 +40,12 @@ if (process.env.NODE_ENV === 'production') {
       }),
       new ExtractTextPlugin("app.css"),
       new webpack.optimize.UglifyJsPlugin({minimize: true})
-    ]  
+    ]
   });
 
-}else{
+} else {
 
-  webpackConfig = merge(webpackConfig,{
+  webpackConfig = merge(webpackConfig, {
     devtool: 'inline-source-map',
     module: {
       loaders: [{
@@ -64,9 +64,9 @@ if (process.env.NODE_ENV === 'production') {
               extra: {
                 'react-transform': {
                   transforms: [{
-                    transform:  'react-transform-hmr',
+                    transform: 'react-transform-hmr',
                     imports: ['react'],
-                    locals:  ['module']
+                    locals: ['module']
                   }]
                 }
               }
@@ -74,18 +74,19 @@ if (process.env.NODE_ENV === 'production') {
           }
         }
       },
-      { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192'},
-      { test: /\.css$/, loader: 'style-loader!css-loader' }
-    ]},
-    entry : [
+        {test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192'},
+        {test: /\.css$/, loader: 'style-loader!css-loader'}
+      ]
+    },
+    entry: [
       'webpack-hot-middleware/client',
       './src/client/index.js'
     ],
-    plugins : [
+    plugins: [
       new webpack.HotModuleReplacementPlugin()
-    ]  
+    ]
   });
-  
+
 }
 
 module.exports = webpackConfig;
