@@ -33,6 +33,8 @@ public class JavaScriptRunner {
 	private NashornScriptEngine getEngine() {
 		NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
 		try {
+			nashornScriptEngine.eval(read("static/nashorn.polyfill.js"));
+			nashornScriptEngine.eval(read("static/server.js"));
 			nashornScriptEngine.eval(read("static/app.js"));
 		} catch (ScriptException e) {
 			throw new RuntimeException(e);

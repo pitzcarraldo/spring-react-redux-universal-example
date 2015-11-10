@@ -10,6 +10,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.script.ScriptException;
 
+import java.util.Map;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
@@ -27,7 +29,7 @@ public class JavaScriptRunnerTest {
 
 	@Test
 	public void test() throws ScriptException, NoSuchMethodException {
-		Object object = sut.run("get", "http://capi.coupang.com/v3/intro");
-		assertThat(object);
+		Map<String, String> object = (Map<String, String>) sut.run("render", "/home");
+		assertThat(object).isNotNull();
 	}
 }

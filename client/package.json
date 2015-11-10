@@ -1,8 +1,7 @@
-
 {
-  "name": "isomorphic-redux-app",
-  "version": "0.1.2-beta",
-  "description": "An example of a isomorphic Redux application",
+  "name": "spring-react-redux-universal-example",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Example of The Universal Web Application using Spring Boot + React + Redux.",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
     "clean": "rm -rf dist",
@@ -50,7 +49,7 @@
     "url-loader": "^0.5.6",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0",
-    "merge":"^1.2.0",
-    "extract-text-webpack-plugin" : "^0.8.2"
+    "extract-text-webpack-plugin" : "^0.8.2",
+    "json-loader": "^0.5.3"
   }
 }

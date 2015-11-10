@@ -17,10 +17,8 @@ export default class Html extends Component {
 				<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			</head>
 			<body>
-			<div id="root">${html}</div>
-			<script>
-				window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-			</script>
+			<div id="root" dangerouslySetInnerHTML={{__html: html}}/>
+			<script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(initialState)};`}} charSet="UTF-8"/>
 			<script src="/static/bundle.js"></script>
 			</body>
 			</html>

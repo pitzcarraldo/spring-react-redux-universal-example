@@ -4,6 +4,7 @@
 	var Phaser = Java.type('java.util.concurrent.Phaser');
 	var TimeUnit = Java.type('java.util.concurrent.TimeUnit');
 	var AsyncHttpClient = Java.type('com.ning.http.client.AsyncHttpClient');
+	var System = Java.type('java.lang.System');
 	var timer = new Timer('jsEventLoop', false);
 	var phaser = new Phaser();
 
@@ -16,9 +17,10 @@
 	context.window = context;
 
 	context.console = {
-		debug: print,
+		log: print,
 		warn: print,
-		log: print
+		error: print,
+		debug: print
 	};
 
 	context.setTimeout = function (fn, millis /* [, args...] */) {
@@ -118,15 +120,12 @@
 		this.withCredentials = false;
 
 		this.abort = function () {
-
 		};
 
 		this.getAllResponseHeaders = function () {
-
 		};
 
 		this.getResponseHeader = function (key) {
-
 		};
 
 		this.setRequestHeader = function (key, value) {
