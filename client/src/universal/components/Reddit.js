@@ -33,40 +33,40 @@ class Reddit extends Component {
     this.props.fetchPostsIfNeeded(selectedReddit);
   }
 
-  render () {
+  render() {
     const { selectedReddit, posts, isFetching, lastUpdated, error } = this.props;
     return (
       <div>
         <Picker value={selectedReddit}
                 onChange={this.handleChange}
-                options={['reactjs', 'frontend']} />
+                options={['reactjs', 'frontend']}/>
         <p className="post-tag">
           {lastUpdated &&
-            <span>
+          <span>
               Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
-              {' '}
+            {' '}
             </span>
           }
           {!isFetching &&
-            <a href='#'
-               onClick={this.handleRefreshClick}>
-              Refresh
-            </a>
+          <a href='#'
+             onClick={this.handleRefreshClick}>
+            Refresh
+          </a>
           }
         </p>
         {isFetching && posts.length === 0 &&
-          <h3>Loading...</h3>
+        <h3>Loading...</h3>
         }
         {!isFetching && error && posts.length === 0 &&
-          <h3 className="post-error">There has been an Error</h3>
+        <h3 className="post-error">There has been an Error</h3>
         }
         {!isFetching && !error && posts.length === 0 &&
-          <h3>Empty</h3>
+        <h3>Empty</h3>
         }
         {posts.length > 0 &&
-          <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <Posts posts={posts} />
-          </div>
+        <div style={{ opacity: isFetching ? 0.5 : 1 }}>
+          <Posts posts={posts}/>
+        </div>
         }
       </div>
     );

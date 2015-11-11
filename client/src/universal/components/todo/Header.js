@@ -11,9 +11,9 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-          <TodoTextInput newTodo
-                         onSave={this.handleSave.bind(this)}
-                         placeholder="What needs to be done?" />
+        <TodoTextInput newTodo
+                       onSave={this.handleSave.bind(this)}
+                       placeholder="What needs to be done?"/>
       </header>
     );
   }

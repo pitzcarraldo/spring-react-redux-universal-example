@@ -21,67 +21,67 @@ import Html from '../common/containers/Html';
 
 const app = express();
 const renderFullPage = (html, initialState) => {
-	return ReactDOMServer.renderToString(<Html html={html} initialState={initialState}/>);
+  return ReactDOMServer.renderToString(<Html html={html} initialState={initialState}/>);
 };
 
 if (process.env.NODE_ENV !== 'production') {
-	const compiler = webpack(webpackConfig);
-	app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
-	app.use(webpackHotMiddleware(compiler));
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
+  app.use(webpackHotMiddleware(compiler));
 } else {
-	app.use('/static', express.static(__dirname + '/../../dist'));
+  app.use('/static', express.static(__dirname + '/../../dist'));
 }
 
 app.get('/*', function (req, res) {
 
-	const location = createLocation(req.url);
+  const location = createLocation(req.url);
 
-	getUser(user => {
+  getUser(user => {
 
-			if (!user) {
-				return res.status(401).end('Not Authorised');
-			}
+      if (!user) {
+        return res.status(401).end('Not Authorised');
+      }
 
-			match({routes, location}, (err, redirectLocation, renderProps) => {
+      match({routes, location}, (err, redirectLocation, renderProps) => {
 
-				if (err) {
-					console.error(err);
-					return res.status(500).end('Internal server error');
-				}
+        if (err) {
+          console.error(err);
+          return res.status(500).end('Internal server error');
+        }
 
-				if (!renderProps)
-					return res.status(404).end('Not found');
+        if (!renderProps)
+          return res.status(404).end('Not found');
 
-				const store = configureStore({user: user, version: packagejson.version});
+        const store = configureStore({user: user, version: packagejson.version});
 
-				const InitialView = (
-					<div>
-						<Provider store={store}>
-							<RoutingContext {...renderProps} />
-						</Provider>
-					</div>
-				);
+        const InitialView = (
+          <div>
+            <Provider store={store}>
+              <RoutingContext {...renderProps} />
+            </Provider>
+          </div>
+        );
 
-				//This method waits for all render component promises to resolve before returning to browser
-				fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
-					.then(html => {
-						const componentHTML = ReactDOMServer.renderToString(InitialView);
-						const initialState = store.getState();
-						res.status(200).end(renderFullPage(componentHTML, initialState))
-					})
-					.catch(err => {
-						console.log(err);
-						res.end(renderFullPage("", {}))
-					});
-			});
+        //This method waits for all render component promises to resolve before returning to browser
+        fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
+          .then(html => {
+            const componentHTML = ReactDOMServer.renderToString(InitialView);
+            const initialState = store.getState();
+            res.status(200).end(renderFullPage(componentHTML, initialState))
+          })
+          .catch(err => {
+            console.log(err);
+            res.end(renderFullPage("", {}))
+          });
+      });
 
-		}
-	)
+    }
+  )
 
 });
 
 const server = app.listen(3002, function () {
-	const host = server.address().address;
-	const port = server.address().port;
-	console.log('Example app listening at http://%s:%s', host, port);
+  const host = server.address().address;
+  const port = server.address().port;
+  console.log('Example app listening at http://%s:%s', host, port);
 });

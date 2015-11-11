@@ -11,7 +11,7 @@ class Item extends Component {
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true });
+    this.setState({editing: true});
   }
 
   handleSave(id, text) {
@@ -20,7 +20,7 @@ class Item extends Component {
     } else {
       this.props.editTodo(id, text);
     }
-    this.setState({ editing: false });
+    this.setState({editing: false});
   }
 
   render() {
@@ -31,7 +31,7 @@ class Item extends Component {
       element = (
         <TodoTextInput text={todo.text}
                        editing={this.state.editing}
-                       onSave={(text) => this.handleSave(todo.id, text)} />
+                       onSave={(text) => this.handleSave(todo.id, text)}/>
       );
     } else {
       element = (
@@ -39,12 +39,12 @@ class Item extends Component {
           <input className="toggle"
                  type="checkbox"
                  checked={todo.completed}
-                 onChange={() => completeTodo(todo.id)} />
+                 onChange={() => completeTodo(todo.id)}/>
           <label onDoubleClick={this.handleDoubleClick.bind(this)}>
             {todo.text}
           </label>
           <button className="destroy"
-                  onClick={() => deleteTodo(todo.id)} />
+                  onClick={() => deleteTodo(todo.id)}/>
         </div>
       );
     }

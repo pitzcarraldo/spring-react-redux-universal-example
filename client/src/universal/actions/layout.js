@@ -1,4 +1,3 @@
-
 import { ActionCreators } from 'redux-undo';
 
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
@@ -6,7 +5,7 @@ export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export function toggleSidebar(value) {
   return {
     type: TOGGLE_SIDEBAR,
-    value : value
+    value: value
   };
 }
 
@@ -23,8 +22,8 @@ export function redo() {
 }
 
 /**
-* Bundle User into layout
-*/
+ * Bundle User into layout
+ */
 
 import { GET_USER, getUser} from './user';
 export { getUser as getUser };

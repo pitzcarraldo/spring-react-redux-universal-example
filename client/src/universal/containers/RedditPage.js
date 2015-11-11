@@ -19,9 +19,9 @@ function mapStateToProps(state) {
     lastUpdated,
     error,
     items: posts
-  } = postsByReddit[selectedReddit] || {
+    } = postsByReddit[selectedReddit] || {
     isFetching: true,
-    error:{},
+    error: {},
     items: []
   };
 
@@ -38,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(RedditActions, dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Reddit);
+export default connect(mapStateToProps, mapDispatchToProps)(Reddit);

@@ -7,8 +7,8 @@ class Todo extends Component {
     const { todos, actions } = this.props;
     return (
       <div className="todocontainer">
-        <Header addTodo={actions.addTodo} />
-        <Section todos={todos} actions={actions} />
+        <Header addTodo={actions.addTodo}/>
+        <Section todos={todos} actions={actions}/>
       </div>
     );
   }

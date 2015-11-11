@@ -31,7 +31,7 @@ export default function createDevToolsWindow(store) {
 
   // Wait a little bit for it to reload, then render.
   setTimeout(() => ReactDOM.render(
-    <DevTools store={store} />,
+    <DevTools store={store}/>,
     win.document.body.appendChild(document.createElement('div'))
   ), 10);
 }

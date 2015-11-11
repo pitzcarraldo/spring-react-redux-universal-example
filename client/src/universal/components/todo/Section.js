@@ -12,7 +12,7 @@ const TODO_FILTERS = {
 class Section extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { filter: SHOW_ALL };
+    this.state = {filter: SHOW_ALL};
   }
 
   handleClearCompleted() {
@@ -23,7 +23,7 @@ class Section extends Component {
   }
 
   handleShow(filter) {
-    this.setState({ filter });
+    this.setState({filter});
   }
 
   renderToggleAll(completedCount) {
@@ -33,7 +33,7 @@ class Section extends Component {
         <input className="toggle-all"
                type="checkbox"
                checked={completedCount === todos.length}
-               onChange={actions.completeAll} />
+               onChange={actions.completeAll}/>
       );
     }
   }
@@ -49,7 +49,7 @@ class Section extends Component {
                 activeCount={activeCount}
                 filter={filter}
                 onClearCompleted={this.handleClearCompleted.bind(this)}
-                onShow={this.handleShow.bind(this)} />
+                onShow={this.handleShow.bind(this)}/>
       );
     }
   }
@@ -60,7 +60,7 @@ class Section extends Component {
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce((count, todo) =>
-      todo.completed ? count + 1 : count,
+        todo.completed ? count + 1 : count,
       0
     );
 

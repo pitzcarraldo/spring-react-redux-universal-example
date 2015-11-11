@@ -10,7 +10,7 @@ module.exports = {
     server: './client/src/server/index.js'
   },
   output: {
-    library: 'app',
+    library: 'render',
     libraryTarget: 'this',
     path: path.join(__dirname, '..', '..', 'src', 'main', 'resources', 'static', 'dist'),
     filename: '[name].js',
@@ -63,7 +63,6 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.browser': false,
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }

@@ -18,7 +18,10 @@ public class RouteService {
 	private JavaScriptRunner runner;
 
 	public RouteResult getRouteResult(String requestUri) {
-		Map<String, Object> result = (Map<String, Object>) runner.run("app", requestUri);
-		return new RouteResult((Integer) result.get(STATUS_KEY), (String) result.get(RESULT_KEY));
+		Map result = (Map) runner.run("render", requestUri);
+		return new RouteResult(
+			(Integer) result.get(STATUS_KEY),
+			(String) result.get(RESULT_KEY)
+		);
 	}
 }

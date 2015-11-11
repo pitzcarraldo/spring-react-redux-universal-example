@@ -11,7 +11,7 @@ import Sidebar from '../components/layout/Sidebar'
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.eventToggleSidebar = this.eventToggleSidebar.bind(this)
     this.eventUndo = this.eventUndo.bind(this)
@@ -37,13 +37,13 @@ class App extends Component {
 
     const { user,layout, version, counter, todos } = this.props;
     const { sidebarOpen } = layout;
-    const layoutClass = classNames({open : sidebarOpen});
+    const layoutClass = classNames({open: sidebarOpen});
 
     return (
       <div className={layoutClass}>
-        <Sidebar layout={layout} user={user} version={version} />
-  	    <div className="wrap">
-          <Header todos={todos} counter={counter} />
+        <Sidebar layout={layout} user={user} version={version}/>
+        <div className="wrap">
+          <Header todos={todos} counter={counter}/>
           <div className="container content">
             {!this.props.children && <Home />}
             {this.props.children}
@@ -59,16 +59,16 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    counter : state.counter.present,
-    todos : state.todos.present,
-    version : state.version,
-  	user : state.user,
-    layout : state.layout.present
+    counter: state.counter.present,
+    todos: state.todos.present,
+    version: state.version,
+    user: state.user,
+    layout: state.layout.present
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(LayoutActions,dispatch);
+  return bindActionCreators(LayoutActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -7,13 +7,13 @@ import createLogger from 'redux-logger';
 import promiseMiddleware from '../api/promiseMiddleware';
 import rootReducer from '../reducers';
 
-const middlewareBuilder = () => {
+const middlewareBuilder = (isClient) => {
 
   let middleware = {};
   let universalMiddleware = [thunk, promiseMiddleware];
   let allComposeElements = [];
 
-  if (process.browser) {
+  if (isClient) {
     if (process.env.NODE_ENV === 'production') {
       middleware = applyMiddleware(...universalMiddleware);
       allComposeElements = [
@@ -43,9 +43,9 @@ const middlewareBuilder = () => {
 
 };
 
-const finalCreateStore = compose(...middlewareBuilder())(createStore);
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState, isClient) {
+  const finalCreateStore = compose(...middlewareBuilder(isClient))(createStore);
   const store = finalCreateStore(rootReducer, initialState);
 
   if (module.hot) {

@@ -16,16 +16,16 @@ import "../../styles/index.css";
 
 const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
-const store = configureStore(initialState);
+const store = configureStore(initialState, true);
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <div>
-	  <Provider store={store}>
-	    <ReduxRouter>
-	      <Router children={routes} history={history} />
-	    </ReduxRouter>
-	  </Provider>
+    <Provider store={store}>
+      <ReduxRouter>
+        <Router children={routes} history={history}/>
+      </ReduxRouter>
+    </Provider>
   </div>,
   document.getElementById('root')
 );

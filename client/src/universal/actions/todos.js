@@ -10,25 +10,25 @@ export const SHOW_COMPLETED = 'SHOW_COMPLETED';
 export const SHOW_ACTIVE = 'SHOW_ACTIVE';
 
 export function addTodo(text) {
-  return { type: ADD_TODO, text };
+  return {type: ADD_TODO, text};
 }
 
 export function deleteTodo(id) {
-  return { type: DELETE_TODO, id };
+  return {type: DELETE_TODO, id};
 }
 
 export function editTodo(id, text) {
-  return { type: EDIT_TODO, id, text };
+  return {type: EDIT_TODO, id, text};
 }
 
 export function completeTodo(id) {
-  return { type: COMPLETE_TODO, id };
+  return {type: COMPLETE_TODO, id};
 }
 
 export function completeAll() {
-  return { type: COMPLETE_ALL };
+  return {type: COMPLETE_ALL};
 }
 
 export function clearCompleted() {
-  return { type: CLEAR_COMPLETED };
+  return {type: CLEAR_COMPLETED};
 }
