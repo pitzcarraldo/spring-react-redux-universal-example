@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class RouteService {
 	private static final String STATUS_KEY = "status";
-	private static final String RESULT_KEY = "result";
+	private static final String BODY_KEY = "body";
 
 	@Autowired
 	private JavaScriptRunner runner;
@@ -21,7 +21,7 @@ public class RouteService {
 		Map result = (Map) runner.run("render", requestUri);
 		return new RouteResult(
 			(Integer) result.get(STATUS_KEY),
-			(String) result.get(RESULT_KEY)
+			(String) result.get(BODY_KEY)
 		);
 	}
 }

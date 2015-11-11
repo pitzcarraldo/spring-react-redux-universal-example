@@ -1,9 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+var babelConfig = require('./babel.config');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   context: path.resolve(__dirname, '..', '..'),
   entry: {
     client: './client/src/client/index.js',
@@ -14,7 +15,7 @@ module.exports = {
     libraryTarget: 'this',
     path: path.join(__dirname, '..', '..', 'src', 'main', 'resources', 'static', 'dist'),
     filename: '[name].js',
-    publicPath: '/static/'
+    publicPath: '/static/dist/'
   },
   module: {
     loaders: [
@@ -22,32 +23,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         exclude: /node_modules/,
-        query: {
-          "stage": 0,
-          "optional": "runtime",
-          "loose": "all",
-          "plugins": [
-            "typecheck"
-          ],
-          "env": {
-            "development": {
-              "plugins": [
-                "react-transform"
-              ],
-              "extra": {
-                "react-transform": {
-                  "transforms": [{
-                    "transform": "react-transform-catch-errors",
-                    "imports": [
-                      "react",
-                      "redbox-react"
-                    ]
-                  }]
-                }
-              }
-            }
-          }
-        }
+        query: babelConfig
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
@@ -67,7 +43,7 @@ module.exports = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin("app.css"),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new ExtractTextPlugin('app.css')
   ]
 };

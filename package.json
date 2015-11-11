@@ -5,7 +5,7 @@
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
     "clean": "rm -rf src/main/resources/static/dist",
-    "dev": "NODE_ENV=development node src/server/index.js --progress --colors --profile",
+    "dev": "NODE_ENV=development node client/bin/dev.server.js --progress --colors --profile",
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile --config client/webpack/webpack.config.js"
   },
   "repository": {
@@ -28,7 +28,8 @@
     "history": "^1.9.0",
     "classnames" : "^2.1.5",
     "axios" : "^0.7.0",
-    "serialize-javascript": "^1.1.2"
+    "serialize-javascript": "^1.1.2",
+    "es6-promise": "^3.0.2"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",

@@ -44,13 +44,6 @@ public class SpringReactReduxUniversalExampleApplication {
 	}
 
 	@Bean
-	public SimpleUrlHandlerMapping simpleUrlHandlerMapping() {
-		SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
-		simpleUrlHandlerMapping.setOrder(0);
-		return simpleUrlHandlerMapping;
-	}
-
-	@Bean
 	public SimpleUrlHandlerMapping staticHandlerMapping() {
 		SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
 		mapping.setOrder(Integer.MIN_VALUE);

@@ -12,5 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RouteResult {
 	private Integer status;
-	private String result;
+	private String body;
 }

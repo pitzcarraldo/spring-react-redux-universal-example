@@ -17,6 +17,6 @@ public class RouteController {
 	@RequestMapping("/**")
 	public String index(HttpServletRequest request) {
 		RouteResult routeResult = routeService.getRouteResult(request.getRequestURI());
-		return routeResult.getResult();
+		return routeResult.getBody();
 	}
 }
