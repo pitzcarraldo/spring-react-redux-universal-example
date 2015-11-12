@@ -2,12 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 
-export default class Html extends Component {
-  static propTypes = {
-    html: PropTypes.string,
-    initialState: PropTypes.object
-  };
-
+class Html extends Component {
   render() {
     const {html, initialState} = this.props;
     return (
@@ -26,3 +21,10 @@ export default class Html extends Component {
     );
   }
 }
+
+Html.propTypes = {
+  html: PropTypes.string,
+  initialState: PropTypes.object
+};
+
+export default Html;
