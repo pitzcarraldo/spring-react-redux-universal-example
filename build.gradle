@@ -1,14 +1,17 @@
 buildscript {
     ext {
         springBootVersion = '1.3.0.RC1'
+        gradleNodeVersion = '0.11'
     }
     repositories {
         mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "com.moowork.gradle:gradle-node-plugin:${gradleNodeVersion}"
     }
 }
 
@@ -17,7 +20,7 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
 apply plugin: 'spring-boot' 
 apply plugin: 'war'
-
+apply plugin: "com.moowork.node"
 
 war {
     baseName = 'spring-react-redux-universal-example'
@@ -36,11 +39,23 @@ configurations {
     providedRuntime
 }
 
+node {
+    version = '4.2.2'
+    npmVersion = '2.14.7'
+    download = true
+}
+
+build.dependsOn(npm_run_build)
+clean.dependsOn(npm_run_clean)
+
 dependencies {
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.ning:async-http-client:1.9.31')
+    compile('com.google.guava:guava:18.0')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
+    testCompile('org.easytesting:fest-assert-core:2.0M10')
 }
 
 dependencyManagement {
