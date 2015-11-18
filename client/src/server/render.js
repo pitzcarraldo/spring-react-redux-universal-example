@@ -37,19 +37,16 @@ export default function render(req, res) {
     const store = configureStore({user: user}, false);
 
     const InitialView = (
-      <div>
-        <Provider store={store}>
+        <Provider store={store} key="provider">
           <RoutingContext {...renderProps} />
         </Provider>
-      </div>
     );
 
     return fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
       .then(html => {
-        const componentHTML = ReactDOMServer.renderToString(InitialView);
         const initialState = store.getState();
-        const body = renderFullPage(componentHTML, initialState);
-        return res.status(200).end(body);
+        const body = renderFullPage(InitialView, initialState);
+        return res.status(200).end('<!DOCTYPE html>' + body);
       })
       .catch(err => {
         console.error(err);
