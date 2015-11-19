@@ -7,26 +7,20 @@ import { ReduxRouter } from 'redux-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import configureStore from '../universal/store/configureStore';
 import routes from '../universal/routes';
-import DevTools from '../server/devtools';
+import DevTools from '../universal/components/DevTools';
 
 import "../../styles/index.css";
 
-const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState, true);
-const rootElement = document.getElementById('root');
-
-ReactDOM.render(
-  <div>
-    <Provider store={store}>
-      <ReduxRouter>
-        <Router children={routes} history={history}/>
-      </ReduxRouter>
-    </Provider>
-  </div>,
-  document.getElementById('root')
+const InitView = (
+  <Provider store={store} key="provider">
+    <ReduxRouter routes={routes} />
+  </Provider>
 );
 
-if (process.env.NODE_ENV !== 'production') {
-  require('../server/createDevToolsWindow')(store);
+//ReactDOM.render(InitView, document.getElementById('root'));
+
+if (process.env.NODE_ENV === 'development') {
+  require('./createDevToolsWindow')(store);
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DevTools from './devtools';
+import DevTools from '../universal/components/DevTools';
+import { Provider } from 'react-redux';
 
 /*
  * Puts Redux DevTools into a separate window.
@@ -31,7 +32,9 @@ export default function createDevToolsWindow(store) {
 
   // Wait a little bit for it to reload, then render.
   setTimeout(() => ReactDOM.render(
-    <DevTools store={store}/>,
+    <Provider store={store}>
+      <DevTools />
+    </Provider>,
     win.document.body.appendChild(document.createElement('div'))
   ), 10);
 }

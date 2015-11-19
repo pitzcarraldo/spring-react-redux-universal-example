@@ -5,6 +5,7 @@ import serialize from 'serialize-javascript';
 class Html extends Component {
   render() {
     const {html, initialState} = this.props;
+    const content = ReactDOM.renderToString(html);
     return (
       <html lang="en-us">
       <head>
@@ -13,7 +14,7 @@ class Html extends Component {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
       </head>
       <body>
-      <div id="root" dangerouslySetInnerHTML={{__html: html}}/>
+      <div id="root" dangerouslySetInnerHTML={{__html: content}}/>
       <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(initialState)};`}} charSet="UTF-8"/>
       <script src="/static/dist/client.js"></script>
       </body>
@@ -23,7 +24,7 @@ class Html extends Component {
 }
 
 Html.propTypes = {
-  html: PropTypes.string,
+  html: PropTypes.node,
   initialState: PropTypes.object
 };
 
