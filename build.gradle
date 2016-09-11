@@ -1,77 +1,91 @@
 buildscript {
-    ext {
-        springBootVersion = '1.3.0.RC1'
-        gradleNodeVersion = '0.11'
-    }
-    repositories {
-        mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "com.moowork.gradle:gradle-node-plugin:${gradleNodeVersion}"
-    }
+	ext {
+		springBootVersion = '1.4.0.RELEASE'
+		springLoadedVersion = '1.2.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "org.springframework:springloaded:${springLoadedVersion}"
+		classpath 'com.google.gradle:osdetector-gradle-plugin:1.4.0'
+	}
 }
 
 apply plugin: 'java'
+apply plugin: 'scala'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 apply plugin: 'war'
-apply plugin: "com.moowork.node"
+apply plugin: 'com.google.osdetector'
 
-war {
-    baseName = 'spring-react-redux-universal-example'
-    version = '0.0.1-SNAPSHOT'
-}
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
 }
 
 configurations {
-    providedRuntime
+	providedRuntime
 }
 
-node {
-    version = '4.2.2'
-    npmVersion = '2.14.7'
-    download = true
+def os
+switch (osdetector.os) {
+	case 'windows':
+		os = 'win32'
+		break
+	case 'osx':
+		os = 'macosx'
+		break
+	default:
+		os = osdetector.os
+		break
 }
-
-build.dependsOn(npm_run_build)
-clean.dependsOn(npm_run_clean)
 
 dependencies {
-    compile('org.projectlombok:lombok')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('com.ning:async-http-client:1.9.31')
-    compile('com.google.guava:guava:18.0')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    testCompile('org.springframework.boot:spring-boot-starter-test') 
-    testCompile('org.easytesting:fest-assert-core:2.0M10')
+	compile('org.projectlombok:lombok')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.ning:async-http-client:1.9.31')
+	compile('org.scala-lang:scala-library:2.11.7')
+	compile("com.eclipsesource.j2v8:j2v8_${os}_x86_64:4.5.0")
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.easytesting:fest-assert-core:2.0M10')
 }
 
 dependencyManagement {
-	imports { 
-		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Brixton.M2" 
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Camden.RC1"
 	}
 }
 
 
 eclipse {
-    classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    }
+	classpath {
+		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
+
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+	}
+}
+
+war {
+	baseName = 'spring-react-redux-universal-example'
+	version = '0.0.1-SNAPSHOT'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
+	gradleVersion = '2.7'
 }

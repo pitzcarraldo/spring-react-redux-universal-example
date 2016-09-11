@@ -1,5 +1,6 @@
 package com.github.pitzcarraldo;
 
+import com.eclipsesource.v8.V8;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,6 +37,11 @@ public class SpringReactReduxUniversalExampleApplication {
 			throw new RuntimeException(e);
 		}
 		return nashornScriptEngine;
+	}
+
+	@Bean
+	public V8 javaScriptRuntime() {
+		return V8.createV8Runtime();
 	}
 
 	private Reader read(String path) {
